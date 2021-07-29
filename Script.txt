@@ -56,7 +56,7 @@ STRING cd $env:TEMP
 ENTER
 DELAY 100
 REM Run file
-STRING .\Client-built.exe
+STRING .\<File Name>
 ENTER
 DELAY 100
 
